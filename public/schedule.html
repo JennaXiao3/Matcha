@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Matcha | Schedule</title>
+        <link rel="icon" href="opo/logo.svg">
+        <!-- Bootstrap 3 -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+        <!-- FIREBASE INITIAL SETUP -->
+        <script src="/__/firebase/8.2.3/firebase-app.js"></script>
+        <script src="/__/firebase/8.2.3/firebase-auth.js"></script>
+        <script src="/__/firebase/8.2.3/firebase-database.js"></script>
+        <script src="/__/firebase/8.2.3/firebase-analytics.js"></script>
+        <script src="/__/firebase/init.js?useEmulator=true"></script>
+
+        <style>
+          @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+          body {
+              background-color: #232629;
+          }
+        
+          /*h1 {
+            font-size: 3vw;
+          }
+
+          h2 {
+            font-size: 1.75vw;
+          }
+
+          h3{
+            font-size: 1.6vw;
+          }
+
+          h4 {
+            font-size: 1.25vw;
+          }*/
+
+          #schedule-head{
+            height: 20%;
+            
+            margin-top: 2%;
+            margin-bottom: 2%;
+          }
+
+          #logo {
+            text-align: left;
+            font-family: 'Exo', sans-serif;
+          }
+
+          #logo a:hover {
+            text-decoration: none;
+          }
+
+          #logoHeading {
+            color: white;
+          }
+
+          #signOut {
+            text-align: right;
+            font-family: 'Exo', sans-serif;
+          }
+
+          #signOutButton {
+            background-color: rgba(255, 0, 0, 0);
+            color: white;
+            transition: 0.3s;
+            margin-right: 10px;
+          }
+
+          #signOutButton:hover {
+            color: #bdf29d;
+            border-color: #bdf29d;
+          }
+
+          .down-button{
+            background-color: rgba(255, 0, 0, 0);
+            transition: 0.3s;
+            border-radius: 100%;
+          }
+
+          .down-button i {
+            background-color: rgba(255, 0, 0, 0);
+            color: white;
+          }
+
+          .down-button:hover{
+            background-color: white;
+          }
+
+          .down-button:focus{
+            border: none;
+          }
+
+          .down-button:hover i {
+            color: #232629;
+            background-color: rgba(255, 0, 0, 0);
+          }
+
+          .modal, .modal-dialog {
+            background-color: rgba(255, 0, 0, 0);
+            transition: 0.3s;
+          }
+          
+
+          .modal-content{
+            background-color: #2c2f33;
+            border-radius: 20px;
+            color: white;
+            font-family: 'Exo', sans-serif;
+            padding: 60px;
+            text-align: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+
+          h1, h2, h3, h4, h5, h6, p {
+            background-color: rgba(255, 0, 0, 0);
+          }
+
+          hr {
+            width: 100%;
+            border: 1px solid white;
+            margin-top: 30px;
+            margin-bottom: 30px;
+          }
+
+          #gc {
+            font-size: 4vw;
+          }
+
+          #membersBox {
+            width: 90%;
+            overflow-y: auto;
+            max-height: 300px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #232629;
+          }
+
+          #cover {position: fixed; height: 100%; width: 100%; top:0; left: 0; text-align: center; background: #232629; z-index:9999; color: white;}
+        </style>
+    </head>
+    <body style="min-width: 1300px;">
+      <div id="cover">
+        <!--<h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">M<span style="color: #bdf29d">@</span>tcha</h3>-->
+        <img src="opo/logo.png" width="40px" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      </div>
+      <!--Table with times-->
+      <center>
+        <div class="container-fluid">
+          <div class="container" id="schedule-head">
+            <div class="row">
+              <div id="logo" class="col-sm-3">
+                <a href="index.html"><div><img src="opo/logo.png" width="40px"></div></a>
+              </div>
+              <div class="col-sm-6">
+                <button type="button" class="btn down-button" data-toggle="modal" data-target="#groupModal"><i class="fas fa-angle-down"></i></button>
+              </div>
+              <div id= "signOut" class="col-sm-3">
+                <button id = "signOutButton" class = "btn btn-outline-light" onclick="signOut()">Sign Out</button>
+              </div>
+              
+            </div>
+          </div>
+          <div class="table-responsive" id='schedule'>
+            <table style="background-color: black">
+              <thead id="schedHead">
+
+                <!--<div hidden id = "plusButton">
+                  <button onclick="addTimeslot()" type = "button" class = "btn btn-danger"></button>
+                </div>-->
+
+              </thead>
+              <tbody id="schedBody">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </center>
+
+      <div class="modal fade" id="groupModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="overflow: hidden">
+            <h3>Group code:</h3>
+            <h1 id="gc">wowwow</h1>
+            <hr>
+            <h3>Group members:</h3>
+            <div id="membersBox">
+
+            </div>
+            <hr>
+            <button onclick = "leaveGroup()" type="button" class="btn btn-lg btn-outline-danger" id="leaveGroupButton">Leave Group</button>
+          </div>
+        </div>
+      </div>
+
+        
+      
+      
+      <!-- SCRIPTS -->
+      <script>
+        $(window).on('load', function() {
+          setTimeout(function(){
+            $('#cover').fadeOut(1000);
+          }, 3500);
+        });
+  
+        
+      </script>
+   
+    <script>
+        var database = firebase.database();
+        var rootRef = database.ref(); //the root node
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                //alert("signed in");
+                database.ref('profiles/'+user.uid+'/groupID').once('value').then(function(snapshot) {
+                    if (snapshot.val()== "" || !(snapshot.exists())) {
+                        window.location.href = "groups.html";
+                    }
+                });
+            } else {
+                //alert("not signed in");
+                window.location.href = "logIn.html";
+            }
+        });
+        //document.getElementById("gc").innerHTML = id;
+      </script>
+    <script src="js/authentication.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/table.js"></script>
+    <script defer src="js/scheduleFormatting.js"></script>
+    </body>
+</html>

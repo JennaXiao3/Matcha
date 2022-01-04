@@ -1,0 +1,253 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+
+#schedule{
+  color: white;
+  border-radius: 50px;
+  width: 85%;
+  background-color: #2c2f33;
+  box-shadow: 2px 2px 20px 20px rgba(0, 0, 0, 0.2);
+  padding-bottom: 50px;
+}
+
+.noneUser {
+  margin: auto;
+  border: 2px solid white;
+  height: 56px;
+  width: 56px;
+  font-family: Noto Sans, sans-serif;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+  transition: 0.5s;
+  position: absolute;
+  opacity: 0;
+}
+
+/* User Icons */
+.schedUnpaired {
+  height: 56px;
+  width: 56px;
+  font-family: Noto Sans, sans-serif;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+
+  position: absolute;
+  transition: 0.5s;
+  transform: translateX(40px);
+}
+
+.schedPaired {
+  height: 56px;
+  width: 56px;
+  font-family: Noto Sans, sans-serif;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding-bottom: 10px;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.schedUnpairedUser {
+  border: 2px solid white;
+  height: 56px;
+  width: 56px;
+  font-family: Noto Sans, sans-serif;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+
+  position: absolute;
+  transform: translateX(40px);
+  margin-bottom: 10px;
+}
+
+.schedPairedUser {
+  border: 2px solid white;
+  height: 56px;
+  width: 56px;
+  font-family: Noto Sans, sans-serif;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding-bottom: 10px;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+
+/* titles */
+
+.timeSlot {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  background-color:#516943;
+  width: 180px;
+  height: 100px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.week {
+  text-align: center;
+  height: 80px;
+  font-size: 30px;
+  padding-top:30px;
+  border-bottom: none;
+  vertical-align: bottom;
+  background-color: #2c2f33;
+  letter-spacing: 2px;
+}
+
+.days {
+  text-align: center;
+  vertical-align: middle;
+  width: 200px;
+  height: 50px;
+  background-color: #2c2f33;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  padding-bottom: 30px;
+  box-shadow: 0px -10px 10px -2px #232629 inset;
+}
+
+/* cells */
+
+.today {
+  border-bottom: 6px solid #bdf29d;
+}
+
+
+.slotEmpty {
+  text-align: center;
+  vertical-align: middle;
+  background-color: #2c2f33;
+}
+
+.beforeTime {
+  box-shadow: 0px -10px 10px -2px #232629 inset;
+}
+
+.slotToday {
+  border-left: 6px solid #bdf29d;
+  border-right: 6px solid #bdf29d;
+  width: 200px;
+  transition: all 0.3s ease-in-out;
+}
+
+.slotCell {
+  text-align: center;
+  vertical-align: middle;
+  padding: 30px;
+  background-color: #32363b;
+  border-left: 6px solid #232629;
+  transition: all 0.3s ease-in-out;
+  height: 100px;
+  position: relative;
+  box-shadow: 0 10px 10px -2px #232629;
+  padding-bottom: 30px;
+}
+
+.slotLast {
+  border-bottom: 6px solid #bdf29d;
+  background-color: #32363b;
+  box-shadow: 0 10px 10px -2px #232629;
+}
+
+/* Hover */
+.slotCell:hover, .slotToday:hover {
+  transform: scale(1.03, 1.03);
+  box-shadow: 2px 2px 25px 5px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0,0,0,0.2);
+}
+/*Case 2*/
+.slotCell:hover .schedUnpaired {
+  transform: translateX(-3px);
+}
+
+/*case 0*/
+.slotCell:hover .addUserBtn {
+  opacity: 1;
+}
+
+
+/* Buttons */
+
+
+.addUserBtn {
+  height: 56px;
+  width: 56px;
+  background-color: #32363b;
+  border: none;
+  color: #32363b;
+  text-align: center;
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  margin: 0%;
+
+  overflow: hidden;
+  
+  position: relative;
+  display: inline-block;
+  transition: all 0.25s ease;
+  opacity: 0;
+}
+.addUserBtn::before {
+  content: '+';
+  color: #bdf29d;
+  transition-duration: 0.5s;
+  box-shadow: inset 0 0 0 2px #bdf29d;
+}
+
+.addUserBtn::after {
+  color: #32363b;
+}
+
+.addUserBtn::before, .addUserBtn::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.25s ease;
+    border-radius: 50%;
+}
+
+.addUserBtn:hover::before{
+    box-shadow: inset 0 0 0 60px #bdf29d;
+    color: black;
+}
+
+.addUserBtn:active, .addUserBtn:focus {
+  border: none;
+}
+.addUserBtn:disabled {
+  opacity: 0;
+  cursor: not-allowed;
+}
+
+.delete {
+  display: none;
+  z-index: -1;
+}
